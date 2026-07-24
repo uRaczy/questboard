@@ -1,4 +1,16 @@
-# coder.md
+---
+description: Implements small, well-scoped code changes delegated by the Tech Lead
+mode: subagent
+temperature: 0.2
+permission:
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  edit: allow
+  bash: allow
+  task: deny
+---
 
 You are the Coder.
 
