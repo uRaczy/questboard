@@ -1,4 +1,4 @@
-import { TopNavigation } from "@/components/layout/top-navigation";
+import { TopNavigation } from "@/components/layout/TopNavigation";
 import { QuestCard } from "@/components/quests/QuestCard";
 import { QuestDetailsOverlay } from "@/components/quests/QuestDetailsOverlay";
 import { getQuestById, getQuestsByStatus } from "@/lib/quests";
@@ -33,22 +33,16 @@ export default async function QuestsPage({ searchParams }: Props) {
 
       <main className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
         <section className="max-w-3xl">
-          <p className="text-sm font-medium uppercase tracking-wide text-stone-500">
-            Quest board
-          </p>
+          <p className="text-sm font-medium uppercase tracking-wide text-stone-500">Quest board</p>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight text-stone-950 sm:text-5xl">
             Track every quest by status.
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-7 text-stone-600 sm:text-lg">
-            Move from future work to active focus to completed wins without
-            leaving the board.
+            Move from future work to active focus to completed wins without leaving the board.
           </p>
         </section>
 
-        <section
-          className="grid gap-4 lg:grid-cols-3"
-          aria-label="Quest kanban board"
-        >
+        <section className="grid gap-4 lg:grid-cols-3" aria-label="Quest kanban board">
           {columns.map((column) => {
             const quests = getQuestsByStatus(mockQuests, column.status);
 
@@ -58,9 +52,7 @@ export default async function QuestsPage({ searchParams }: Props) {
                 className="flex flex-col gap-4 rounded-lg border border-stone-200 bg-stone-50 p-4"
               >
                 <div className="flex items-center justify-between gap-3">
-                  <h2 className="text-lg font-semibold text-stone-950">
-                    {column.title}
-                  </h2>
+                  <h2 className="text-lg font-semibold text-stone-950">{column.title}</h2>
                   <span className="rounded-full bg-white px-2.5 py-1 text-sm font-medium text-stone-600">
                     {quests.length}
                   </span>
@@ -69,11 +61,7 @@ export default async function QuestsPage({ searchParams }: Props) {
                 <div className="flex flex-col gap-3">
                   {quests.length > 0 ? (
                     quests.map((quest) => (
-                      <QuestCard
-                        key={quest.id}
-                        quest={quest}
-                        href={`/quests?quest=${quest.id}`}
-                      />
+                      <QuestCard key={quest.id} quest={quest} href={`/quests?quest=${quest.id}`} />
                     ))
                   ) : (
                     <p className="rounded-lg border border-dashed border-stone-300 bg-white p-5 text-sm text-stone-500">
@@ -87,9 +75,7 @@ export default async function QuestsPage({ searchParams }: Props) {
         </section>
       </main>
 
-      {hasQuestParam ? (
-        <QuestDetailsOverlay closeHref="/quests" quest={selectedQuest} />
-      ) : null}
+      {hasQuestParam ? <QuestDetailsOverlay closeHref="/quests" quest={selectedQuest} /> : null}
     </div>
   );
 }

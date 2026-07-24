@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { TopNavigation } from "@/components/layout/top-navigation";
+import { TopNavigation } from "@/components/layout/TopNavigation";
 import { QuestCard } from "@/components/quests/QuestCard";
 import { QuestDetailsOverlay } from "@/components/quests/QuestDetailsOverlay";
 import { getQuestById, getQuestPreviewByStatus } from "@/lib/quests";
@@ -29,13 +29,8 @@ export default async function Home({ searchParams }: Props) {
   const selectedQuest = getQuestById(mockQuests, selectedQuestId);
   const hasQuestParam = selectedQuestId !== undefined;
   const activeQuests = mockQuests.filter((quest) => quest.status === "active");
-  const completedQuests = mockQuests.filter(
-    (quest) => quest.status === "complete",
-  );
-  const totalMinutes = mockQuests.reduce(
-    (minutes, quest) => minutes + quest.timeSpentMinutes,
-    0,
-  );
+  const completedQuests = mockQuests.filter((quest) => quest.status === "complete");
+  const totalMinutes = mockQuests.reduce((minutes, quest) => minutes + quest.timeSpentMinutes, 0);
 
   return (
     <div className="min-h-screen">
@@ -50,30 +45,23 @@ export default async function Home({ searchParams }: Props) {
             Organize your quests without losing sight of the next move.
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-7 text-stone-600 sm:text-lg">
-            Questboard gives this project a simple, responsive starting point
-            for planning priorities, following progress, and shaping the app
-            one clear step at a time.
+            Questboard gives this project a simple, responsive starting point for planning
+            priorities, following progress, and shaping the app one clear step at a time.
           </p>
         </section>
 
         <section className="grid gap-4 sm:grid-cols-3" aria-label="Quest stats">
           <div className="rounded-lg border border-stone-200 bg-white p-5">
             <p className="text-sm text-stone-500">Active quests</p>
-            <p className="mt-2 text-3xl font-semibold text-stone-950">
-              {activeQuests.length}
-            </p>
+            <p className="mt-2 text-3xl font-semibold text-stone-950">{activeQuests.length}</p>
           </div>
           <div className="rounded-lg border border-stone-200 bg-white p-5">
             <p className="text-sm text-stone-500">Completed quests</p>
-            <p className="mt-2 text-3xl font-semibold text-stone-950">
-              {completedQuests.length}
-            </p>
+            <p className="mt-2 text-3xl font-semibold text-stone-950">{completedQuests.length}</p>
           </div>
           <div className="rounded-lg border border-stone-200 bg-white p-5">
             <p className="text-sm text-stone-500">Time logged</p>
-            <p className="mt-2 text-3xl font-semibold text-stone-950">
-              {totalMinutes} min
-            </p>
+            <p className="mt-2 text-3xl font-semibold text-stone-950">{totalMinutes} min</p>
           </div>
         </section>
 
@@ -100,16 +88,11 @@ export default async function Home({ searchParams }: Props) {
 
           <div className="grid gap-4 sm:grid-cols-3">
             {previewStatuses.map((preview) => {
-              const quest = getQuestPreviewByStatus(
-                mockQuests,
-                preview.status,
-              );
+              const quest = getQuestPreviewByStatus(mockQuests, preview.status);
 
               return (
                 <div key={preview.status} className="flex flex-col gap-3">
-                  <h3 className="text-sm font-medium text-stone-500">
-                    {preview.title}
-                  </h3>
+                  <h3 className="text-sm font-medium text-stone-500">{preview.title}</h3>
                   {quest ? (
                     <QuestCard quest={quest} href={`/?quest=${quest.id}`} />
                   ) : (
@@ -124,9 +107,7 @@ export default async function Home({ searchParams }: Props) {
         </section>
       </main>
 
-      {hasQuestParam ? (
-        <QuestDetailsOverlay closeHref="/" quest={selectedQuest} />
-      ) : null}
+      {hasQuestParam ? <QuestDetailsOverlay closeHref="/" quest={selectedQuest} /> : null}
     </div>
   );
 }
